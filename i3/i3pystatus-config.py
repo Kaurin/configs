@@ -15,11 +15,12 @@ status = Status(logfile='$HOME/.config/i3/i3pystatus.log')
 
 # Clock
 status.register("clock",
-    format=" ⏰ %c ",)
+    format=" ⏰ %c",
+    on_leftclick="gnome-calendar")
 
 # CPU load
 status.register("load",
-    format="  {avg1} {avg5} {avg15} ",)
+    format=" 💥 {avg1} {avg5} {avg15} ",)
 
 # CPU temps
 status.register("temp",
@@ -30,18 +31,18 @@ status.register("temp",
 
 # CPU usage bar
 status.register("cpu_usage_bar",
-    format=" 📊 |{usage_bar_cpu0}|{usage_bar_cpu1}|{usage_bar_cpu2}|{usage_bar_cpu3}|{usage_bar_cpu4}|{usage_bar_cpu5}|{usage_bar_cpu6}|{usage_bar_cpu7}| ",
+    format=" {usage_bar_cpu0}|{usage_bar_cpu1}|{usage_bar_cpu2}|{usage_bar_cpu3}|{usage_bar_cpu4}|{usage_bar_cpu5}|{usage_bar_cpu6}|{usage_bar_cpu7}| ",
     bar_type="vertical")
 
 
 
 # CPU graph
 status.register("cpu_usage_graph",
-    format=" 📈 {cpu_graph} ",
+    format=" {cpu_graph} ",
     graph_width=15)
 # CPU frequency
 status.register("cpu_freq",
-    format="  {avgg} ")
+    format=" 🏁 {avgg} ")
 
 # Memory bar
 # status.register("mem_bar",
@@ -50,14 +51,16 @@ status.register("cpu_freq",
 
 # Memory numbers
 status.register("mem",
-    format="  {used_mem}/{total_mem}GB ",
-    divisor=1073741824)
+    # format=" 📜 {used_mem}/{total_mem} ",
+    format=" 📜 {used_mem} M ",
+    round_size=None,)
+    # divisor=1073741824)
 
 # Network stats
 status.register("network",
     interface="eno1",
-    format_up="  {interface} -  {bytes_sent} Mbps -  {bytes_recv} Mbps ",
-    format_down="  {interface} - 🛑 ",
+    format_up=" 🌍 {interface} - {bytes_sent} Mbps - {bytes_recv} Mbps ",
+    format_down=" {interface} - 🛑 ",
     sent_limit=24,
     recv_limit=240,
     divisor=125000,
@@ -66,7 +69,9 @@ status.register("network",
 # RootFS usage
 status.register("disk",
     path="/",
-    format=" 💾: {used}/{total}G ",)
+    format=" 💾: {used}/{total} ",
+    round_size=None,
+    critical_limit= 10 )
 
 # Pulse audio volume
 status.register("pulseaudio",
@@ -76,7 +81,9 @@ status.register("pulseaudio",
 # Language bar - should be at the end because of variable size.
 status.register("xkblayout",
     format=" {symbol}{variant} ",
-    layouts=["us","rs","rs(latin)"],)
+    layouts=["us","rs","rs(latin)"],
+    on_leftclick=["change_layout",1],
+    on_rightclick=["change_layout",-1] )
 
 # Off to the races
 status.run()
