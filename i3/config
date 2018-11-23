@@ -1,9 +1,7 @@
-#
 # Extra Software needed:
 # * numlockx         - for numlock
 # * feh              - background/wallpaper
 # * redshift-gtk     - to save your eyes
-# * compton          - for vsync (watch videos without tearing) 'dnf copr enable mrbloups/compton ; dnf --refresh install compton'
 # * scrot            - screenshots
 # * i3lock           - screen lock
 # * i3pystatus       - for the fancy status bar!  'pip3 install i3pystatus'
