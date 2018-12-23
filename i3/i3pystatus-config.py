@@ -74,9 +74,13 @@ status.register("disk",
     critical_limit= 10 )
 
 # Pulse audio volume
+# How to get sink names:
+# pacmd list-sinks | grep -e 'name:'
 status.register("pulseaudio",
     format=" 🔊 {volume} ",
-    step=1,)
+    step=1,
+    sink="alsa_output.pci-0000_00_1b.0.iec958-stereo",)
+
 
 # Language bar - should be at the end because of variable size.
 status.register("xkblayout",
